@@ -56,4 +56,5 @@ footer {
 
 .content {
     flex: 1;
+    height: 200px;
 }
