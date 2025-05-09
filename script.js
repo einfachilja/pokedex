@@ -56,3 +56,21 @@ function onclickProtection(event) {
     event.stopPropagation();
 }
 
+function showSpecStats(){
+    document.getElementById('spects_main').classList.add('d-none');
+    document.getElementById('spects_evo').classList.add('d-none');
+    document.getElementById('spects_stats').classList.remove('d-none');
+}
+
+function showSpecEvo(){
+    document.getElementById('spects_stats').classList.add('d-none');
+    document.getElementById('spects_main').classList.add('d-none');
+    document.getElementById('spects_evo').classList.remove('d-none');
+}
+
+function showSpecMain(){
+    document.getElementById('spects_stats').classList.add('d-none');
+    document.getElementById('spects_evo').classList.add('d-none');
+    document.getElementById('spects_main').classList.remove('d-none');
+}
+

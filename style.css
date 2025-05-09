@@ -141,12 +141,50 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 8px;
 }
 
 .overlay-content {
-  width: 400px;
+  width: 300px;
+}
+
+
+
+.overlay-pokemon-specs-headline {
+  background-color: #87888b;
+  display: flex;
+  justify-content: space-around;
+}
+
+.overlay-pokemon-specs-headline a {
+  padding: 4px;
+  width: 100%;
+  text-align: center;
+  border: 1px solid grey;
+  cursor: pointer;
+}
+
+.overlay-pokemon-specs-headline a:hover {
+  border-bottom: 1px solid #e74a47;
+}
+
+.overlay-pokemon-specs {
+  background-color: #4d5161;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  border-radius:  0 0 8px 8px;
+}
+
+.overlay-card-footer {
+  background-color: #4d5161;
+  height: 40px;
+  padding: 8px;
+  text-align: center;
 }
 
 .d-none {
-  display: none;
-}
+    display: none;
+  }
