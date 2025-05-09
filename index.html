@@ -14,19 +14,25 @@
 <body onload="onloadFunc()">
 
     <header>
-        <div class="header-left-side">
-            <img class="header-logo" src="./assets/icons/favicon.png" alt="">
-            <h1>Pokédex</h1>
-        </div>
-        <input class="input-search" type="text" placeholder="min. 3 Buchstaben">
+        <nav class="max-width-1440">
+            <div class="header-left-side">
+                <a href="index.html"><img class="header-logo" src="./assets/icons/favicon.png" alt=""></a>
+                <a href="index.html"><h1>Pokédex</h1></a>
+            </div>
+            <input class="input-search" type="text" placeholder="min. 3 Buchstaben">
+        </nav>
     </header>
 
-    <div id="content" class="content">
+    <div id="content" class="content max-width-1440">
     </div>
 
+    <div id="overlay" class="overlay d-none"></div>
+
     <footer>
-        <img class="footer-logo" src="./assets/icons/pokemon.png" alt="">
-        © 2025 | Pokédex
+        <div class="footer-nav max-width-1440">
+            <img class="footer-logo" src="./assets/icons/pokemon.png" alt="">
+            © 2025 | Pokédex
+        </div>
     </footer>
 
 

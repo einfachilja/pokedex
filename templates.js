@@ -1,15 +1,15 @@
-function getPokemonTemplate(index, responseJson, imgSrc, type) {
+function getPokemonTemplate(responsePokemonJson) {
     return `
-            <div class="card">
+            <div class="card" onclick="loadSelectedPokemon(${responsePokemonJson.id})">
                 <div class="card-header">
-                    <span>#${index + 1}</span>
-                    <h2>${responseJson.results[index].name}</h2>
+                    <span>#${responsePokemonJson.id}</span>
+                    <h2>${responsePokemonJson.name}</h2>
                 </div>
-                <div class="card-body" style="background-color: ${typeColors[type]}">
-                    <img id="pokemon_img" class="pokemon-img"  src="${imgSrc}">
+                <div class="card-body" style="background-color: ${typeColors[responsePokemonJson.types[0].type.name]}">
+                    <img id="pokemon_img" class="pokemon-img"  src="${responsePokemonJson.sprites.other.home.front_default}">
                 </div>
                 <div class="card-footer">
-                   <h2>${type}</h2>
+                   <h2>${responsePokemonJson.abilities.map((item) => { return item.ability.name}).join(" ")}</h2>
                 </div>
             </div>`;
 }
