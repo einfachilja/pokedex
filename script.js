@@ -29,11 +29,9 @@ async function loadAllPokemon(path = "") {
   // zusätzlicher pfad um auf z.B. name zuzugreifen
   let response = await fetch(BASE_URL + path + ".json"); // am Ende der url nach .json fragen, sonst gehts nicht!
   let responseJson = await response.json(); // wenn keine methode definiert, dann standard GET
-
   for (let indexPokemon = 0; indexPokemon < responseJson.results.length; indexPokemon++) {
     let responsePokemon = await fetch(responseJson.results[indexPokemon].url);
     let responsePokemonJson = await responsePokemon.json();
-
     document.getElementById("content").innerHTML += getPokemonTemplate(responsePokemonJson);
   }
 }
@@ -41,12 +39,20 @@ async function loadAllPokemon(path = "") {
 async function loadSelectedPokemon(id) {// zusätzlicher pfad um auf z.B. name zuzugreifen
   let responseSelectedPokemon = await fetch(BASE_URL + id); // am Ende der url nach .json fragen, sonst gehts nicht!
   let responseSelectedPokemonJson = await responseSelectedPokemon.json(); // wenn keine methode definiert, dann standard GET
-  
-  console.log(responseSelectedPokemonJson);
-  console.log("#" + id);
-  console.log("name " + responseSelectedPokemonJson.name);
-  console.log("height " + responseSelectedPokemonJson.height);
-  console.log("base experience " + responseSelectedPokemonJson.base_experience);
-  console.log("abilities" + responseSelectedPokemonJson.abilities.map((item) => { return item.ability.name }));
-
+  document.getElementById('overlay').innerHTML = getSelectedPokemonTemplate(responseSelectedPokemonJson);
+  openOverlay()
 }
+
+function openOverlay() {
+    document.getElementById('overlay').classList.remove('d-none');
+}
+
+function closeOverlay() {
+    document.getElementById('overlay').classList.add('d-none');
+}
+
+// Event bubbling
+function onclickProtection(event) {
+    event.stopPropagation();
+}
+
