@@ -19,14 +19,15 @@
                 <a href="index.html"><img class="header-logo" src="./assets/icons/favicon.png" alt=""></a>
                 <a href="index.html"><h1>Pokédex</h1></a>
             </div>
-            <input class="input-search" type="text" placeholder="min. 3 Buchstaben">
+            <input id="input_search" class="input-search" type="text" placeholder="min. 3 Buchstaben" onkeyup="searchPokemon()">
         </nav>
     </header>
 
-    <div id="content" class="content max-width-1440">
-    </div>
+    <div id="content" class="content max-width-1440"></div>
 
     <div id="overlay" class="overlay d-none" onclick="closeOverlay()"></div>
+
+    <div><button onclick="loadMorePokemon()">Mehr laden</button></div>
 
     <footer>
         <div class="footer-nav max-width-1440">
@@ -34,9 +35,6 @@
             © 2025 | Pokédex
         </div>
     </footer>
-
-
-
 </body>
 
 </html>
