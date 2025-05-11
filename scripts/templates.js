@@ -21,7 +21,7 @@ function getSelectedPokemonTemplate(responseSelectedPokemonJson) {
                 <span>#${responseSelectedPokemonJson.id}</span>
                 <h2>${responseSelectedPokemonJson.name}</h2>
             </div>
-            <div class="card-body" style="background-color: ${typeColors[responseSelectedPokemonJson.types[0].type.name]}">
+            <div class="card-body ${responseSelectedPokemonJson.types[0].type.name}">
                 <img id="pokemon_img" class="pokemon-img"  src="${responseSelectedPokemonJson.sprites.other.home.front_default}">
             </div>
             <div class="overlay-card-footer">
@@ -48,27 +48,27 @@ function getSelectedPokemonTemplate(responseSelectedPokemonJson) {
             </div>
              <div id="spects_stats" class="overlay-pokemon-specs d-none">
                 <div>
-                    hp
+                    ${responseSelectedPokemonJson.stats[0].stat.name}: ${responseSelectedPokemonJson.stats[0].base_stat}
                 </div>
                   <div>
-                    attack
+                    ${responseSelectedPokemonJson.stats[1].stat.name}: ${responseSelectedPokemonJson.stats[1].base_stat}
                 </div>
                 <div>
-                    defence
+                   ${responseSelectedPokemonJson.stats[2].stat.name}: ${responseSelectedPokemonJson.stats[2].base_stat}
                 </div>
                 <div>
-                    special-attack
+                    ${responseSelectedPokemonJson.stats[3].stat.name}: ${responseSelectedPokemonJson.stats[3].base_stat}
                 </div>
                 <div>
-                    special-defense
+                    ${responseSelectedPokemonJson.stats[4].stat.name}: ${responseSelectedPokemonJson.stats[4].base_stat}
                 </div>
                 <div>
-                    speed
+                    ${responseSelectedPokemonJson.stats[5].stat.name}: ${responseSelectedPokemonJson.stats[5].base_stat} 
                 </div>
             </div>
             <div id="spects_evo" class="overlay-pokemon-specs d-none">
                 <div>
-                    1
+                   
                 </div>
                 <div>
                     2

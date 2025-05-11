@@ -4,6 +4,7 @@ let step = 15;
 
 function onloadFunc() {
   loadAllPokemon("/?limit=25&offset=0");
+  loadEvoChain()
 }
 
 const BASE_URL = "https://pokeapi.co/api/v2/pokemon/"; // konstant von Anfang an definieren
@@ -16,11 +17,7 @@ async function loadAllPokemon(path = "") {
   let contentRef = document.getElementById("content");
   contentRef.innerHTML = "";
 
-  for (
-    let indexPokemon = 0;
-    indexPokemon < responseJson.results.length;
-    indexPokemon++
-  ) {
+  for (let indexPokemon = 0; indexPokemon < responseJson.results.length; indexPokemon++) {
     let responsePokemon = await fetch(responseJson.results[indexPokemon].url);
     let responsePokemonJson = await responsePokemon.json();
     contentRef.innerHTML += getPokemonTemplate(responsePokemonJson);
@@ -31,18 +28,21 @@ async function loadSelectedPokemon(id) {
   // zusätzlicher pfad um auf z.B. name zuzugreifen
   let responseSelectedPokemon = await fetch(BASE_URL + id); // am Ende der url nach .json fragen, sonst gehts nicht!
   let responseSelectedPokemonJson = await responseSelectedPokemon.json(); // wenn keine methode definiert, dann standard GET
-  document.getElementById("overlay").innerHTML = getSelectedPokemonTemplate(
-    responseSelectedPokemonJson
-  );
+  document.getElementById("overlay").innerHTML = getSelectedPokemonTemplate(responseSelectedPokemonJson);
+  console.log(responseSelectedPokemonJson);
+  
   openOverlay();
 }
 
 function openOverlay() {
   document.getElementById("overlay").classList.remove("d-none");
+  document.getElementById("html").classList.add("overflow-hidden");
+
 }
 
 function closeOverlay() {
   document.getElementById("overlay").classList.add("d-none");
+  document.getElementById("html").classList.remove("overflow-hidden");
 }
 
 // Event bubbling

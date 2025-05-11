@@ -39,6 +39,8 @@ body {
 header {
   background-color: #4d5161;
   width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 6px 12px, rgba(0, 0, 0, 0.12) 0px 3px 6px,
+    rgba(0, 0, 0, 0.17) 0px 1px 3px;
 }
 
 nav {
@@ -72,6 +74,8 @@ nav {
 footer {
   background-color: #4d5161;
   width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px -6px 12px,
+    rgba(0, 0, 0, 0.12) 0px -3px 6px, rgba(0, 0, 0, 0.17) 0px -1px 3px;
 }
 
 .footer-nav {
@@ -97,13 +101,16 @@ footer {
 }
 
 .pokemon-img {
-  height: 150px;
+  height: 200px;
 }
 
 .card {
   border-radius: 8px;
   margin: 8px;
-  width: 200px;
+  width: 250px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 .card:hover {
@@ -152,8 +159,6 @@ footer {
   width: 300px;
 }
 
-
-
 .overlay-pokemon-specs-headline {
   background-color: #87888b;
   display: flex;
@@ -179,7 +184,7 @@ footer {
   flex-direction: column;
   justify-content: center;
   gap: 12px;
-  border-radius:  0 0 8px 8px;
+  border-radius: 0 0 8px 8px;
 }
 
 .overlay-card-footer {
@@ -190,20 +195,27 @@ footer {
 }
 
 .d-none {
-    display: none;
-  }
+  display: none;
+}
 
 button {
-    background-color: #E74B48;
-    color: white;
-    height: 40px;
-    width: 200px;
-    margin-bottom: 24px;
-    font-size: 20px;
-    border: 2px solid #4d5161;
+  background-color: #e74b48;
+  color: white;
+  height: 40px;
+  width: 200px;
+  margin-bottom: 24px;
+  font-size: 20px;
+  border: 2px solid #4d5161;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 button:hover {
-    background-color: rgba(231, 75, 72, 0.8);
-    cursor: pointer;
+  background-color: rgba(231, 75, 72, 0.8);
+  cursor: pointer;
+}
+
+.overflow-hidden {
+  overflow: hidden;
 }
