@@ -5,7 +5,7 @@ function getPokemonTemplate(responsePokemonJson) {
                 <span>#${responsePokemonJson.id}</span>
                 <h2>${responsePokemonJson.name}</h2>
             </div>
-            <div class="card-body" style="background-color: ${typeColors[responsePokemonJson.types[0].type.name]}">
+            <div class="card-body ${responsePokemonJson.types[0].type.name}">
                <img id="pokemon_img" class="pokemon-img"  src="${responsePokemonJson.sprites.other.home.front_default}">
             </div>
             <div class="card-footer">
