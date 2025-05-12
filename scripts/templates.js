@@ -58,3 +58,29 @@ function getSelectedPokemonTemplate(responseSelectedPokemonJson) {
             </div>
         </div>`;
 }
+
+function getSearchedPokemonTemplate(responseSearchedPokemonJSON) {
+    return `
+        <div class="card" onclick="loadSelectedPokemon(${responseSearchedPokemonJSON.id})">
+            <div class="card-header">
+                <span>#${responseSearchedPokemonJSON.id}</span>
+                <h2>${responseSearchedPokemonJSON.name}</h2>
+            </div>
+            <div class="card-body bg_${
+              responseSearchedPokemonJSON.types[0].type.name
+            }">
+               <img id="pokemon_img" class="pokemon-img"  src="${
+                 responseSearchedPokemonJSON.sprites.other.home.front_default
+               }">
+            </div>
+            <div class="card-footer">
+                <h2>  ${responseSearchedPokemonJSON.types
+                  .map((item) => {
+                    return item.type.name;
+                  })
+                  .join(" ")}</h2>
+                <div class="grass"></div>
+            </div>
+        </div>`
+    
+}
