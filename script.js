@@ -1,9 +1,9 @@
 // zusätzliche pokemon laden beim klicken auf den button
-let limit = 40;
-let step = 15;
+let limit = 60;
+let step = 30;
 
 function onloadFunc() {
-  loadAllPokemon("/?limit=25&offset=0");
+  loadAllPokemon("/?limit=30&offset=0");
 }
 
 const BASE_URL = "https://pokeapi.co/api/v2/pokemon/"; // konstant von Anfang an definieren
