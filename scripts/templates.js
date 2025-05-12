@@ -5,11 +5,12 @@ function getPokemonTemplate(responsePokemonJson) {
                 <span>#${responsePokemonJson.id}</span>
                 <h2>${responsePokemonJson.name}</h2>
             </div>
-            <div class="card-body ${responsePokemonJson.types[0].type.name}">
+            <div class="card-body bg_${responsePokemonJson.types[0].type.name}">
                <img id="pokemon_img" class="pokemon-img"  src="${responsePokemonJson.sprites.other.home.front_default}">
             </div>
             <div class="card-footer">
-                <h2>${responsePokemonJson.types.map((item) => { return item.type.name}).join(" ")}</h2>
+                <h2>  ${responsePokemonJson.types.map((item) => { return item.type.name}).join(" ")}</h2>
+                <div class="grass"></div>
             </div>
         </div>`;
 }
@@ -21,7 +22,7 @@ function getSelectedPokemonTemplate(responseSelectedPokemonJson) {
                 <span>#${responseSelectedPokemonJson.id}</span>
                 <h2>${responseSelectedPokemonJson.name}</h2>
             </div>
-            <div class="card-body ${responseSelectedPokemonJson.types[0].type.name}">
+            <div class="card-body bg_${responseSelectedPokemonJson.types[0].type.name}">
                 <img id="pokemon_img" class="pokemon-img"  src="${responseSelectedPokemonJson.sprites.other.home.front_default}">
             </div>
             <div class="overlay-card-footer">
