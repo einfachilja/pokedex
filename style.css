@@ -24,6 +24,8 @@ h2 {
 
 span {
   font-size: 20px;
+  position: absolute;
+  left: 8px;
 }
 
 body {
@@ -129,9 +131,11 @@ footer {
   background-color: #4d5161;
   border-radius: 8px 8px 0 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   height: 40px;
-  padding: 8px;
+  padding: 12px;
+  position: relative;
+  align-items: center;
 }
 
 .card-footer {
@@ -185,6 +189,7 @@ footer {
   justify-content: center;
   gap: 12px;
   border-radius: 0 0 8px 8px;
+  height: 200px;
 }
 
 .overlay-card-footer {
@@ -254,4 +259,3 @@ button:hover {
   display: flex;
   justify-content: space-around;
 }
-

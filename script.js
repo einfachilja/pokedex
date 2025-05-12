@@ -28,7 +28,6 @@ async function renderAllPokemon(responseJson) {
   }
 }
 
-
 async function loadSelectedPokemon(id) {
   // zusätzlicher pfad um auf z.B. name zuzugreifen
   let responseSelectedPokemon = await fetch(BASE_URL + id); // am Ende der url nach .json fragen, sonst gehts nicht!
@@ -96,7 +95,6 @@ async function searchPokemon(path = "/?limit=100000&offset=0") {
     }));
 
   console.log(searchedPokemon);
-
 
   // for (let i = 0; i < searchedPokemon.length; i++) {
   //   const responsePokemon = await fetch(searchedPokemon[i].url);
