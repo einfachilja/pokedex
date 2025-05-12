@@ -4,7 +4,6 @@ let step = 15;
 
 function onloadFunc() {
   loadAllPokemon("/?limit=25&offset=0");
-  loadEvoChain()
 }
 
 const BASE_URL = "https://pokeapi.co/api/v2/pokemon/"; // konstant von Anfang an definieren
@@ -12,10 +11,15 @@ const BASE_URL = "https://pokeapi.co/api/v2/pokemon/"; // konstant von Anfang an
 async function loadAllPokemon(path = "") {
   // zusätzlicher pfad um auf z.B. name zuzugreifen
   let response = await fetch(BASE_URL + path + ".json"); // am Ende der url nach .json fragen, sonst gehts nicht!
-  let responseJson = await response.json(); // wenn keine methode definiert, dann standard GET
+  let responseJson = await response.json(); // wenn keine methode definiert, dann standard GE
 
-  let contentRef = document.getElementById("content");
-  contentRef.innerHTML = "";
+  renderAllPokemon(responseJson);
+
+}
+
+async function renderAllPokemon(responseJson) {
+    let contentRef = document.getElementById("content");
+    contentRef.innerHTML = "";
 
   for (let indexPokemon = 0; indexPokemon < responseJson.results.length; indexPokemon++) {
     let responsePokemon = await fetch(responseJson.results[indexPokemon].url);
@@ -23,6 +27,7 @@ async function loadAllPokemon(path = "") {
     contentRef.innerHTML += getPokemonTemplate(responsePokemonJson);
   }
 }
+
 
 async function loadSelectedPokemon(id) {
   // zusätzlicher pfad um auf z.B. name zuzugreifen
@@ -76,17 +81,39 @@ function loadMorePokemon() {
 async function searchPokemon(path = "/?limit=100000&offset=0") {
   let responseSearchPokemon = await fetch(BASE_URL + path);
   let responseSearchPokemonJson = await responseSearchPokemon.json();
+  
   let inputValueRef = document.getElementById("input_search");
   let contentRef = document.getElementById("content");
   contentRef.innerHTML = "";
 
-  console.log("Eingabe: " + inputValueRef.value);
+  console.log("Eingabe: " , inputValueRef.value);
 
-  let searchedPokemon = responseSearchPokemonJson.results.filter((pokemon) => {return pokemon.name.includes(inputValueRef.value);});
+  let searchedPokemon = responseSearchPokemonJson.results
+    .filter(pokemon => pokemon.name.toLowerCase().includes(inputValueRef.value.trim().toLowerCase()))
+    .map(pokemon => ({
+      name: pokemon.name,
+      url: pokemon.url,
+    }));
 
-  for (let index = 0; index < searchedPokemon.length; index++) {
-    console.log("Gefunden :" + searchedPokemon[index].name);
+  console.log(searchedPokemon);
 
-    contentRef.innerHTML += `<div>${searchedPokemon[index].name}</div>`;
-  }
+
+  // for (let i = 0; i < searchedPokemon.length; i++) {
+  //   const responsePokemon = await fetch(searchedPokemon[i].url);
+  //   const responsePokemonJson = await responsePokemon.json();
+
+  //   contentRef.innerHTML += `
+  //       <div class="card" onclick="loadSelectedPokemon(${responsePokemonJson.id})">
+  //           <div class="card-header">
+  //               <span>#${responsePokemonJson.id}</span>
+  //               <h2>${responsePokemonJson.name}</h2>
+  //           </div>
+  //           <div class="card-body ${responsePokemonJson.types[0].type.name}">
+  //              <img id="pokemon_img" class="pokemon-img"  src="${responsePokemonJson.sprites.other.home.front_default}">
+  //           </div>
+  //           <div class="card-footer">
+  //               <h2>${responsePokemonJson.types.map((item) => { return item.type.name}).join(" ")}</h2>
+  //           </div>
+  //       </div>`;
+  // }
 }
