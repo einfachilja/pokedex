@@ -54,7 +54,7 @@ function getSelectedPokemonTemplate(responseSelectedPokemonJson) {
                     <div>2</div>
                     <div>></div>
                     <div>3</div>
-                </div>
+                </div>  
             </div>
         </div>`;
 }

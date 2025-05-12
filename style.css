@@ -1,6 +1,5 @@
-
 @font-face {
-  font-family: 'Roboto';
+  font-family: "Roboto";
   src: url("./assets/fonts/Roboto_VariableFont_wdth_wght.ttf");
 }
 
@@ -20,7 +19,7 @@ a {
 }
 
 h1 {
-  font-size: 30px;
+  font-size: 24px;
 }
 
 h2 {
@@ -42,7 +41,7 @@ body {
   color: white;
   justify-content: center;
   align-items: center;
-  font-family: 'Roboto', 'sans-serif';
+  font-family: "Roboto", "sans-serif";
   font-size: 16px;
 }
 
@@ -290,4 +289,19 @@ svg {
 
 .d-none {
   display: none;
+}
+
+@media (max-width: 380px) {
+  .header-logo {
+    height: 40px;
+  }
+
+  .header-left-side {
+    gap: 8px;
+  }
+
+  nav {
+    padding: 8px;
+  }
+
 }
