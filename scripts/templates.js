@@ -3,7 +3,7 @@ function getPokemonTemplate(responsePokemonJson) {
         <div class="card" onclick="loadSelectedPokemon(${responsePokemonJson.id})">
             <div class="card-header">
                 <span>#${responsePokemonJson.id}</span>
-                <h2>${responsePokemonJson.name}</h2>
+                <h2>${(responsePokemonJson.name).charAt(0).toUpperCase() + (responsePokemonJson.name).slice(1)}</h2>
             </div>
             <div class="card-body bg_${responsePokemonJson.types[0].type.name}">
                <img id="pokemon_img" class="pokemon-img"  src="${responsePokemonJson.sprites.other.home.front_default}">
@@ -20,7 +20,7 @@ function getSelectedPokemonTemplate(responseSelectedPokemonJson) {
         <div class="overlay-content" onclick="onclickProtection(event)">
             <div class="card-header">
                 <span>#${responseSelectedPokemonJson.id}</span>
-                <h2>${responseSelectedPokemonJson.name}</h2>
+                <h2>${(responseSelectedPokemonJson.name).charAt(0).toUpperCase() + (responseSelectedPokemonJson.name).slice(1)}</h2>
             </div>
             <div class="card-body bg_${responseSelectedPokemonJson.types[0].type.name}">
                 <img id="pokemon_img" class="pokemon-img"  src="${responseSelectedPokemonJson.sprites.other.home.front_default}">

@@ -45,7 +45,7 @@ async function loadSelectedPokemon(id) {
   let responseSelectedPokemon = await fetch(BASE_URL + id); // am Ende der url nach .json fragen, sonst gehts nicht!
   let responseSelectedPokemonJson = await responseSelectedPokemon.json(); // wenn keine methode definiert, dann standard GET
   document.getElementById("overlay").innerHTML = getSelectedPokemonTemplate(responseSelectedPokemonJson);
-  loadEvolutionChain(id);
+  // loadEvolutionChain(id);
   openOverlay();
 }
 
