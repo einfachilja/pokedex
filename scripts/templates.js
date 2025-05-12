@@ -1,6 +1,6 @@
 function getPokemonTemplate(responsePokemonJson) {
     return `
-        <div class="card" onclick="loadSelectedPokemon(${responsePokemonJson.id})">
+        <div id="card" class="card" onclick="loadSelectedPokemon(${responsePokemonJson.id})">
             <div class="card-header">
                 <span>#${responsePokemonJson.id}</span>
                 <h2>${(responsePokemonJson.name).charAt(0).toUpperCase() + (responsePokemonJson.name).slice(1)}</h2>

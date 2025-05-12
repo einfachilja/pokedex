@@ -27,11 +27,32 @@
         </nav>
     </header>
 
-    <div id="content" class="content max-width-1440"></div>
+    <div id="content" class="content max-width-1440">
+    </div>
 
     <div id="overlay" class="overlay d-none" onclick="closeOverlay()"></div>
 
-    <div><button onclick="loadMorePokemon()">Mehr laden</button></div>
+    <div id="spinner" class="spinner d-none">
+        <svg width="150" height="150" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <g>
+                <!-- Outer circle -->
+                <circle cx="50" cy="50" r="45" stroke="#333" stroke-width="5" fill="none" />
+
+                <!-- Upper half (red) -->
+                <path d="M5,50 A45,45 0 0,1 95,50" fill="#e74c3c" stroke="#333" stroke-width="2" />
+
+                <!-- Lower half (white) -->
+                <path d="M95,50 A45,45 0 0,1 5,50" fill="#ffffff" stroke="#333" stroke-width="2" />
+
+                <!-- Center circle outer ring -->
+                <circle cx="50" cy="50" r="12" fill="#ffffff" stroke="#333" stroke-width="4" />
+
+                <!-- Center circle inner ring -->
+                <circle cx="50" cy="50" r="6" fill="#cccccc" stroke="#333" stroke-width="2" />
+            </g>
+        </svg>loading...</div>
+
+    <div id="button"><button onclick="loadMorePokemon()">Mehr laden</button></div>
 
     <footer>
         <div class="footer-nav max-width-1440">

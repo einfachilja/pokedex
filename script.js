@@ -12,7 +12,11 @@ async function loadAllPokemon(path = "") {
   let response = await fetch(BASE_URL + path + ".json"); // am Ende der url nach .json fragen, sonst gehts nicht!
   let responseJson = await response.json(); // wenn keine methode definiert, dann standard GE
 
-  renderAllPokemon(responseJson);
+  showSpinner();
+
+  await renderAllPokemon(responseJson);
+
+  hideSpinner();
 }
 
 async function renderAllPokemon(responseJson) {
@@ -37,14 +41,18 @@ async function renderSearchPokemon(searchedPokemon) {
   for (let i = 0; i < searchedPokemon.length; i++) {
     let responseSearchedPokemon = await fetch(searchedPokemon[i].url);
     let responseSearchedPokemonJSON = await responseSearchedPokemon.json();
-    contentRef.innerHTML += getSearchedPokemonTemplate(responseSearchedPokemonJSON);
+    contentRef.innerHTML += getSearchedPokemonTemplate(
+      responseSearchedPokemonJSON
+    );
   }
 }
 
 async function loadSelectedPokemon(id) {
   let responseSelectedPokemon = await fetch(BASE_URL + id); // am Ende der url nach .json fragen, sonst gehts nicht!
   let responseSelectedPokemonJson = await responseSelectedPokemon.json(); // wenn keine methode definiert, dann standard GET
-  document.getElementById("overlay").innerHTML = getSelectedPokemonTemplate(responseSelectedPokemonJson);
+  document.getElementById("overlay").innerHTML = getSelectedPokemonTemplate(
+    responseSelectedPokemonJson
+  );
   // loadEvolutionChain(id);
   openOverlay();
 }
@@ -56,13 +64,28 @@ async function searchPokemon(path = "/?limit=10000&offset=0") {
 
   if (inputValueRef.value.length >= 3) {
     console.log("Eingabe: ", inputValueRef.value);
-    let searchedPokemon = responseSearchPokemonJson.results.filter((pokemon) => pokemon.name.toLowerCase().includes(inputValueRef.value.trim().toLowerCase()));
+    let searchedPokemon = responseSearchPokemonJson.results.filter((pokemon) =>
+      pokemon.name
+        .toLowerCase()
+        .includes(inputValueRef.value.trim().toLowerCase())
+    );
     renderSearchPokemon(searchedPokemon);
-
   } else if (inputValueRef.value.length == 0) {
     console.log("LEER");
     loadAllPokemon("/?limit=25&offset=0");
   }
+}
+
+function showSpinner() {
+  document.getElementById("spinner").classList.remove("d-none");
+  document.getElementById("content").classList.add("d-none");
+  document.getElementById("button").classList.add("d-none");
+}
+
+function hideSpinner() {
+  document.getElementById("spinner").classList.add("d-none");
+  document.getElementById("content").classList.remove("d-none");
+  document.getElementById("button").classList.remove("d-none");
 }
 
 function showSpecStats() {
@@ -101,14 +124,3 @@ function loadMorePokemon() {
   loadAllPokemon("/?limit=" + limit + "&offset=0");
   limit = limit + step;
 }
-
-// async function loadEvolutionChain(id) {
-//   // zusätzlicher pfad um auf z.B. name zuzugreifen
-//   let responseEvolutionChain = await fetch(
-//     "https://pokeapi.co/api/v2/evolution-chain/" + id
-//   ); // am Ende der url nach .json fragen, sonst gehts nicht!
-//   let responseEvolutionChainJson = await responseEvolutionChain.json(); // wenn keine methode definiert, dann standard GET
-//   console.log(responseEvolutionChainJson.chain.species.name);
-//   console.log(responseEvolutionChainJson.chain.evolves_to[0].species.name);
-//   console.log(responseEvolutionChainJson.chain);
-// }
