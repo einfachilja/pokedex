@@ -1,9 +1,10 @@
 let limit = 30;
 let step = 30;
-let loadedPokemon = [];
+let loadedPokemonArray = [];
+let searchedPokemonArray = [];
 
 function onloadFunc() {
-  loadAllPokemon("/?limit=10000&offset=0");
+  loadAllPokemon("/?limit=" + limit + "&offset=0");
 }
 
 const BASE_URL = "https://pokeapi.co/api/v2/pokemon/";
@@ -12,19 +13,23 @@ async function loadAllPokemon(path = "") {
   let response = await fetch(BASE_URL + path);
   let responseJson = await response.json();
 
-  loadedPokemon = responseJson.results;
+  loadedPokemonArray = responseJson.results;
 
   showSpinner();
-  await renderAllPokemon(loadedPokemon);
+  await renderAllPokemon(loadedPokemonArray);
   hideSpinner();
 }
 
-async function renderAllPokemon(loadedPokemon) {
+async function renderAllPokemon(loadedPokemonArray) {
   let contentRef = document.getElementById("content");
   contentRef.innerHTML = "";
 
-  for (let indexPokemon = 0; indexPokemon < limit; indexPokemon++) {
-    let responsePokemon = await fetch(loadedPokemon[indexPokemon].url);
+  for (
+    let indexPokemon = 0;
+    indexPokemon < loadedPokemonArray.length;
+    indexPokemon++
+  ) {
+    let responsePokemon = await fetch(loadedPokemonArray[indexPokemon].url);
     let responsePokemonJson = await responsePokemon.json();
     checkImageSrc(responsePokemonJson);
     contentRef.innerHTML += getPokemonTemplate(responsePokemonJson);
@@ -34,9 +39,7 @@ async function renderAllPokemon(loadedPokemon) {
 async function loadSelectedPokemon(id) {
   let responseSelectedPokemon = await fetch(BASE_URL + id);
   let responseSelectedPokemonJson = await responseSelectedPokemon.json();
-  document.getElementById("overlay").innerHTML = getSelectedPokemonTemplate(
-    responseSelectedPokemonJson
-  );
+  document.getElementById("overlay").innerHTML = getSelectedPokemonTemplate(responseSelectedPokemonJson);
   openOverlay();
 
   // check if last pokemon reached
@@ -53,15 +56,17 @@ async function searchPokemon() {
   if (inputValueRef.value.length >= 3) {
     // hide button during search
     document.getElementById("button").classList.add("d-none");
-    let searchedPokemon = loadedPokemon.filter((pokemon) =>
-      pokemon.name
-        .toLowerCase()
-        .includes(inputValueRef.value.trim().toLowerCase())
-    );
-    renderAllPokemon(searchedPokemon);
+    searchedPokemonArray = loadedPokemonArray.filter((pokemon) => pokemon.name.toLowerCase().includes(inputValueRef.value.trim().toLowerCase()));
+    
+    if (searchedPokemonArray.length == 0) {
+      document.getElementById("content").innerHTML = "pokemon not found";
+    } else renderAllPokemon(searchedPokemonArray);
+
   } else if (inputValueRef.value.length == 0) {
-    renderAllPokemon(loadedPokemon);
     document.getElementById("button").classList.remove("d-none");
+    showSpinner();
+    await renderAllPokemon(loadedPokemonArray);
+    hideSpinner();
   }
 }
 
@@ -113,14 +118,13 @@ function previousPokemon(id) {
 
 function checkImageSrc(responsePokemonJson) {
   if (responsePokemonJson.sprites.other.home.front_default == null) {
-    responsePokemonJson.sprites.other.home.front_default =
-      "./assets/icons/favicon.png";
+    responsePokemonJson.sprites.other.home.front_default = "./assets/icons/favicon.png";
   }
 }
 
 async function loadMorePokemon() {
   limit = limit + step;
   showSpinner();
-  await renderAllPokemon(loadedPokemon);
+  await loadAllPokemon("/?limit=" + limit + "&offset=0");
   hideSpinner();
 }
