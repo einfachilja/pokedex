@@ -1,4 +1,3 @@
-// zusätzliche pokemon laden beim klicken auf den button
 let limit = 60;
 let step = 30;
 
@@ -6,11 +5,11 @@ function onloadFunc() {
   loadAllPokemon("/?limit=30&offset=0");
 }
 
-const BASE_URL = "https://pokeapi.co/api/v2/pokemon/"; // konstant von Anfang an definieren
+const BASE_URL = "https://pokeapi.co/api/v2/pokemon/";
 
 async function loadAllPokemon(path = "") {
-  let response = await fetch(BASE_URL + path + ".json"); // am Ende der url nach .json fragen, sonst gehts nicht!
-  let responseJson = await response.json(); // wenn keine methode definiert, dann standard GE
+  let response = await fetch(BASE_URL + path + ".json"); 
+  let responseJson = await response.json();
 
   showSpinner();
 
@@ -45,12 +44,9 @@ async function renderSearchPokemon(searchedPokemon) {
 }
 
 async function loadSelectedPokemon(id) {
-  let responseSelectedPokemon = await fetch(BASE_URL + id); // am Ende der url nach .json fragen, sonst gehts nicht!
-  let responseSelectedPokemonJson = await responseSelectedPokemon.json(); // wenn keine methode definiert, dann standard GET
-  document.getElementById("overlay").innerHTML = getSelectedPokemonTemplate(
-    responseSelectedPokemonJson
-  );
-  // loadEvolutionChain(id);
+  let responseSelectedPokemon = await fetch(BASE_URL + id);
+  let responseSelectedPokemonJson = await responseSelectedPokemon.json(); 
+  document.getElementById("overlay").innerHTML = getSelectedPokemonTemplate(responseSelectedPokemonJson);
   openOverlay();
 }
 
@@ -60,7 +56,6 @@ async function searchPokemon(path = "/?limit=10000&offset=0") {
   let inputValueRef = document.getElementById("input_search");
 
   if (inputValueRef.value.length >= 3) {
-    console.log("Eingabe: ", inputValueRef.value);
     let searchedPokemon = responseSearchPokemonJson.results.filter((pokemon) =>
       pokemon.name
         .toLowerCase()
@@ -68,7 +63,6 @@ async function searchPokemon(path = "/?limit=10000&offset=0") {
     );
     renderSearchPokemon(searchedPokemon);
   } else if (inputValueRef.value.length == 0) {
-    console.log("LEER");
     loadAllPokemon("/?limit=25&offset=0");
   }
 }
@@ -87,19 +81,11 @@ function hideSpinner() {
 
 function showSpecStats() {
   document.getElementById("spects_main").classList.add("d-none");
-  document.getElementById("spects_evo").classList.add("d-none");
   document.getElementById("spects_stats").classList.remove("d-none");
-}
-
-function showSpecEvo() {
-  document.getElementById("spects_stats").classList.add("d-none");
-  document.getElementById("spects_main").classList.add("d-none");
-  document.getElementById("spects_evo").classList.remove("d-none");
 }
 
 function showSpecMain() {
   document.getElementById("spects_stats").classList.add("d-none");
-  document.getElementById("spects_evo").classList.add("d-none");
   document.getElementById("spects_main").classList.remove("d-none");
 }
 
@@ -128,6 +114,6 @@ function nextPokemon(id) {
 }
 
 function previousPokemon(id) {
-  id++;
+  id--;
   loadSelectedPokemon(id);
 }

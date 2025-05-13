@@ -31,7 +31,6 @@ function getSelectedPokemonTemplate(responseSelectedPokemonJson) {
             <div class="overlay-pokemon-specs-headline">
                 <a onclick="showSpecMain()">main</a>
                 <a onclick="showSpecStats()">stats</a>
-                <a onclick="showSpecEvo()">evo</a>
             </div>
             <div id="spects_main" class="overlay-pokemon-specs">
                 <div class="main"><div class="main-title">height</div> <div>: ${responseSelectedPokemonJson.height / 10 } m</div></div>
@@ -46,15 +45,6 @@ function getSelectedPokemonTemplate(responseSelectedPokemonJson) {
                 <div class="stats">${responseSelectedPokemonJson.stats[3].stat.name} <div class="stat-bar"><div class="stat-bar-fill" style="width: ${(responseSelectedPokemonJson.stats[3].base_stat) / 255 * 100 }%;"></div></div></div>
                 <div class="stats">${responseSelectedPokemonJson.stats[4].stat.name} <div class="stat-bar"><div class="stat-bar-fill" style="width: ${(responseSelectedPokemonJson.stats[4].base_stat) / 255 * 100 }%;"></div></div></div>
                 <div class="stats">${responseSelectedPokemonJson.stats[5].stat.name} <div class="stat-bar"><div class="stat-bar-fill" style="width: ${(responseSelectedPokemonJson.stats[5].base_stat) / 255 * 100 }%;"></div></div></div>
-            </div>
-            <div id="spects_evo" class="overlay-pokemon-specs d-none">
-                <div class="evo">
-                    <div>1</div>
-                    <div>></div>
-                    <div>2</div>
-                    <div>></div>
-                    <div>3</div>
-                </div>  
             </div>
             <div class="overlay-navigation">
                 <img src="./assets/icons/previous.png" onclick="previousPokemon(${responseSelectedPokemonJson.id})">
