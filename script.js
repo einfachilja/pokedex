@@ -1,35 +1,31 @@
-let limit = 60;
+let limit = 25;
 let step = 30;
+let loadedPokemon = [];
 
 function onloadFunc() {
-  loadAllPokemon("/?limit=30&offset=0");
+  loadAllPokemon("/?limit=10000&offset=0");
 }
 
 const BASE_URL = "https://pokeapi.co/api/v2/pokemon/";
 
 async function loadAllPokemon(path = "") {
-  let response = await fetch(BASE_URL + path + ".json");
+  let response = await fetch(BASE_URL + path);
   let responseJson = await response.json();
 
+  loadedPokemon = responseJson.results;
+
   showSpinner();
-
-  await renderAllPokemon(responseJson);
-
+  await renderAllPokemon(loadedPokemon);
   hideSpinner();
 }
 
-async function renderAllPokemon(responseJson) {
+async function renderAllPokemon(loadedPokemon) {
   let contentRef = document.getElementById("content");
   contentRef.innerHTML = "";
 
-  for (
-    let indexPokemon = 0;
-    indexPokemon < responseJson.results.length;
-    indexPokemon++
-  ) {
-    let responsePokemon = await fetch(responseJson.results[indexPokemon].url);
+  for (let indexPokemon = 0; indexPokemon < limit; indexPokemon++) {
+    let responsePokemon = await fetch(loadedPokemon[indexPokemon].url);
     let responsePokemonJson = await responsePokemon.json();
-
     contentRef.innerHTML += getPokemonTemplate(responsePokemonJson);
   }
 }
@@ -42,7 +38,7 @@ async function renderSearchPokemon(searchedPokemon) {
     let responseSearchedPokemon = await fetch(searchedPokemon[i].url);
     let responseSearchedPokemonJSON = await responseSearchedPokemon.json();
 
-     checkImageSrc(responseSearchedPokemonJSON);
+    checkImageSrc(responseSearchedPokemonJSON);
 
     contentRef.innerHTML += getSearchedPokemonTemplate(
       responseSearchedPokemonJSON
@@ -121,11 +117,6 @@ function onclickProtection(event) {
   event.stopPropagation();
 }
 
-function loadMorePokemon() {
-  loadAllPokemon("/?limit=" + limit + "&offset=0");
-  limit = limit + step;
-}
-
 function nextPokemon(id) {
   id++;
   loadSelectedPokemon(id);
@@ -137,8 +128,15 @@ function previousPokemon(id) {
 }
 
 function checkImageSrc(responseSearchedPokemonJSON) {
-  if (responseSearchedPokemonJSON.sprites.other.home.front_default == null ) {
+  if (responseSearchedPokemonJSON.sprites.other.home.front_default == null) {
     responseSearchedPokemonJSON.sprites.other.home.front_default =
       "./assets/icons/favicon.png";
   }
+}
+
+async function loadMorePokemon() {
+  limit = limit + step;
+  showSpinner();
+  await renderAllPokemon(loadedPokemon);
+  hideSpinner();
 }
