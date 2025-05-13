@@ -8,7 +8,7 @@ function onloadFunc() {
 const BASE_URL = "https://pokeapi.co/api/v2/pokemon/";
 
 async function loadAllPokemon(path = "") {
-  let response = await fetch(BASE_URL + path + ".json"); 
+  let response = await fetch(BASE_URL + path + ".json");
   let responseJson = await response.json();
 
   showSpinner();
@@ -22,7 +22,10 @@ async function renderAllPokemon(responseJson) {
   let contentRef = document.getElementById("content");
   contentRef.innerHTML = "";
 
-  for (let indexPokemon = 0; indexPokemon < responseJson.results.length; indexPokemon++
+  for (
+    let indexPokemon = 0;
+    indexPokemon < responseJson.results.length;
+    indexPokemon++
   ) {
     let responsePokemon = await fetch(responseJson.results[indexPokemon].url);
     let responsePokemonJson = await responsePokemon.json();
@@ -45,9 +48,17 @@ async function renderSearchPokemon(searchedPokemon) {
 
 async function loadSelectedPokemon(id) {
   let responseSelectedPokemon = await fetch(BASE_URL + id);
-  let responseSelectedPokemonJson = await responseSelectedPokemon.json(); 
-  document.getElementById("overlay").innerHTML = getSelectedPokemonTemplate(responseSelectedPokemonJson);
+  let responseSelectedPokemonJson = await responseSelectedPokemon.json();
+  document.getElementById("overlay").innerHTML = getSelectedPokemonTemplate(
+    responseSelectedPokemonJson
+  );
   openOverlay();
+
+  // check if last pokemon reached
+  if (id <= 1) {
+    document.getElementById("previous_arrow").classList.add("d-none");
+    document.getElementById("overlay-navigation").style.justifyContent = "flex-end";
+  }
 }
 
 async function searchPokemon(path = "/?limit=10000&offset=0") {
@@ -56,7 +67,11 @@ async function searchPokemon(path = "/?limit=10000&offset=0") {
   let inputValueRef = document.getElementById("input_search");
 
   if (inputValueRef.value.length >= 3) {
-    let searchedPokemon = responseSearchPokemonJson.results.filter((pokemon) => pokemon.name.toLowerCase().includes(inputValueRef.value.trim().toLowerCase()));
+    let searchedPokemon = responseSearchPokemonJson.results.filter((pokemon) =>
+      pokemon.name
+        .toLowerCase()
+        .includes(inputValueRef.value.trim().toLowerCase())
+    );
     renderSearchPokemon(searchedPokemon);
   } else if (inputValueRef.value.length == 0) {
     loadAllPokemon("/?limit=25&offset=0");

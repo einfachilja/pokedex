@@ -46,9 +46,9 @@ function getSelectedPokemonTemplate(responseSelectedPokemonJson) {
                 <div class="stats">${responseSelectedPokemonJson.stats[4].stat.name} <div class="stat-bar"><div class="stat-bar-fill" style="width: ${(responseSelectedPokemonJson.stats[4].base_stat) / 255 * 100 }%;"></div></div></div>
                 <div class="stats">${responseSelectedPokemonJson.stats[5].stat.name} <div class="stat-bar"><div class="stat-bar-fill" style="width: ${(responseSelectedPokemonJson.stats[5].base_stat) / 255 * 100 }%;"></div></div></div>
             </div>
-            <div class="overlay-navigation">
-                <img src="./assets/icons/previous.png" onclick="previousPokemon(${responseSelectedPokemonJson.id})">
-                <img src="./assets/icons/next.png" onclick="nextPokemon(${responseSelectedPokemonJson.id})">
+            <div id="overlay-navigation" class="overlay-navigation">
+                <img id="previous_arrow" src="./assets/icons/previous.png" onclick="previousPokemon(${responseSelectedPokemonJson.id})">
+                <img id="next_arrow" src="./assets/icons/next.png" onclick="nextPokemon(${responseSelectedPokemonJson.id})">
             </div>
         </div>`;
 }
