@@ -26,23 +26,8 @@ async function renderAllPokemon(loadedPokemon) {
   for (let indexPokemon = 0; indexPokemon < limit; indexPokemon++) {
     let responsePokemon = await fetch(loadedPokemon[indexPokemon].url);
     let responsePokemonJson = await responsePokemon.json();
+    checkImageSrc(responsePokemonJson);
     contentRef.innerHTML += getPokemonTemplate(responsePokemonJson);
-  }
-}
-
-async function renderSearchPokemon(searchedPokemon) {
-  let contentRef = document.getElementById("content");
-  contentRef.innerHTML = "";
-
-  for (let i = 0; i < searchedPokemon.length; i++) {
-    let responseSearchedPokemon = await fetch(searchedPokemon[i].url);
-    let responseSearchedPokemonJSON = await responseSearchedPokemon.json();
-
-    checkImageSrc(responseSearchedPokemonJSON);
-
-    contentRef.innerHTML += getSearchedPokemonTemplate(
-      responseSearchedPokemonJSON
-    );
   }
 }
 
@@ -62,20 +47,18 @@ async function loadSelectedPokemon(id) {
   }
 }
 
-async function searchPokemon(path = "/?limit=10000&offset=0") {
-  let responseSearchPokemon = await fetch(BASE_URL + path);
-  let responseSearchPokemonJson = await responseSearchPokemon.json();
+async function searchPokemon() {
   let inputValueRef = document.getElementById("input_search");
 
   if (inputValueRef.value.length >= 3) {
     // hide button during search
     document.getElementById("button").classList.add("d-none");
-    let searchedPokemon = responseSearchPokemonJson.results.filter((pokemon) =>
+    let searchedPokemon = loadedPokemon.filter((pokemon) =>
       pokemon.name
         .toLowerCase()
         .includes(inputValueRef.value.trim().toLowerCase())
     );
-    renderSearchPokemon(searchedPokemon);
+    renderAllPokemon(searchedPokemon);
   } else if (inputValueRef.value.length == 0) {
     renderAllPokemon(loadedPokemon);
     document.getElementById("button").classList.remove("d-none");
@@ -128,9 +111,9 @@ function previousPokemon(id) {
   loadSelectedPokemon(id);
 }
 
-function checkImageSrc(responseSearchedPokemonJSON) {
-  if (responseSearchedPokemonJSON.sprites.other.home.front_default == null) {
-    responseSearchedPokemonJSON.sprites.other.home.front_default =
+function checkImageSrc(responsePokemonJson) {
+  if (responsePokemonJson.sprites.other.home.front_default == null) {
+    responsePokemonJson.sprites.other.home.front_default =
       "./assets/icons/favicon.png";
   }
 }
