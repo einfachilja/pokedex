@@ -1,4 +1,4 @@
-let limit = 25;
+let limit = 30;
 let step = 30;
 let loadedPokemon = [];
 
@@ -77,7 +77,8 @@ async function searchPokemon(path = "/?limit=10000&offset=0") {
     );
     renderSearchPokemon(searchedPokemon);
   } else if (inputValueRef.value.length == 0) {
-    loadAllPokemon("/?limit=25&offset=0");
+    renderAllPokemon(loadedPokemon);
+    document.getElementById("button").classList.remove("d-none");
   }
 }
 
