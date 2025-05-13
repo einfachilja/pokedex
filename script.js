@@ -23,10 +23,7 @@ async function renderAllPokemon(responseJson) {
   let contentRef = document.getElementById("content");
   contentRef.innerHTML = "";
 
-  for (
-    let indexPokemon = 0;
-    indexPokemon < responseJson.results.length;
-    indexPokemon++
+  for (let indexPokemon = 0; indexPokemon < responseJson.results.length; indexPokemon++
   ) {
     let responsePokemon = await fetch(responseJson.results[indexPokemon].url);
     let responsePokemonJson = await responsePokemon.json();
@@ -123,4 +120,14 @@ function onclickProtection(event) {
 function loadMorePokemon() {
   loadAllPokemon("/?limit=" + limit + "&offset=0");
   limit = limit + step;
+}
+
+function nextPokemon(id) {
+  id++;
+  loadSelectedPokemon(id);
+}
+
+function previousPokemon(id) {
+  id++;
+  loadSelectedPokemon(id);
 }

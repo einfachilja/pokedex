@@ -195,7 +195,6 @@ footer {
   flex-direction: column;
   justify-content: center;
   gap: 12px;
-  border-radius: 0 0 8px 8px;
   height: 200px;
 }
 
@@ -287,6 +286,22 @@ svg {
   width: 100%;
 }
 
+.overlay-navigation {
+  background-color: #4d5161;
+  border-radius: 0 0 8px 8px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 16px 16px 16px;
+}
+
+.overlay-navigation img {
+  height: 40px;
+}
+
+.overlay-navigation img:hover {
+  cursor: pointer;
+}
+
 .d-none {
   display: none;
 }
@@ -303,5 +318,4 @@ svg {
   nav {
     padding: 8px;
   }
-
 }

@@ -56,6 +56,10 @@ function getSelectedPokemonTemplate(responseSelectedPokemonJson) {
                     <div>3</div>
                 </div>  
             </div>
+            <div class="overlay-navigation">
+                <img src="./assets/icons/previous.png" onclick="previousPokemon(${responseSelectedPokemonJson.id})">
+                <img src="./assets/icons/next.png" onclick="nextPokemon(${responseSelectedPokemonJson.id})">
+            </div>
         </div>`;
 }
 
