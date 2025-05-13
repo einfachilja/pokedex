@@ -95,6 +95,74 @@ nav {
   width: 120px;
 }
 
+.overlay {
+  background-color: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+}
+
+.overlay-content {
+  width: 300px;
+}
+
+.overlay-pokemon-specs-headline {
+  background-color: #87888b;
+  display: flex;
+  justify-content: space-around;
+}
+
+.overlay-pokemon-specs-headline a {
+  padding: 4px;
+  width: 100%;
+  text-align: center;
+  border: 1px solid grey;
+  cursor: pointer;
+}
+
+.overlay-pokemon-specs-headline a:hover {
+  border-bottom: 1px solid #e74a47;
+}
+
+.overlay-pokemon-specs {
+  background-color: #4d5161;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  height: 200px;
+}
+
+.overlay-card-footer {
+  background-color: #4d5161;
+  height: 40px;
+  padding: 8px;
+  text-align: center;
+}
+
+.overlay-navigation {
+  background-color: #4d5161;
+  border-radius: 0 0 8px 8px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 16px 16px 16px;
+}
+
+.overlay-navigation img {
+  height: 40px;
+}
+
+.overlay-navigation img:hover {
+  cursor: pointer;
+}
+
 .spinner {
   display: flex;
   flex-direction: column;
@@ -136,6 +204,10 @@ footer {
 .footer-logo {
   height: 96px;
   filter: invert(1);
+}
+
+.d-none {
+  display: none;
 }
 
 @media (max-width: 380px) {

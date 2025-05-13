@@ -56,11 +56,7 @@ async function searchPokemon(path = "/?limit=10000&offset=0") {
   let inputValueRef = document.getElementById("input_search");
 
   if (inputValueRef.value.length >= 3) {
-    let searchedPokemon = responseSearchPokemonJson.results.filter((pokemon) =>
-      pokemon.name
-        .toLowerCase()
-        .includes(inputValueRef.value.trim().toLowerCase())
-    );
+    let searchedPokemon = responseSearchPokemonJson.results.filter((pokemon) => pokemon.name.toLowerCase().includes(inputValueRef.value.trim().toLowerCase()));
     renderSearchPokemon(searchedPokemon);
   } else if (inputValueRef.value.length == 0) {
     loadAllPokemon("/?limit=25&offset=0");
