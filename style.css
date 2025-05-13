@@ -222,4 +222,8 @@ footer {
   nav {
     padding: 8px;
   }
+
+  .input-search {
+    width: 100px;
+}
 }

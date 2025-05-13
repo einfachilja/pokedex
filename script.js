@@ -29,6 +29,7 @@ async function renderAllPokemon(responseJson) {
   ) {
     let responsePokemon = await fetch(responseJson.results[indexPokemon].url);
     let responsePokemonJson = await responsePokemon.json();
+
     contentRef.innerHTML += getPokemonTemplate(responsePokemonJson);
   }
 }
@@ -40,6 +41,9 @@ async function renderSearchPokemon(searchedPokemon) {
   for (let i = 0; i < searchedPokemon.length; i++) {
     let responseSearchedPokemon = await fetch(searchedPokemon[i].url);
     let responseSearchedPokemonJSON = await responseSearchedPokemon.json();
+
+     checkImageSrc(responseSearchedPokemonJSON);
+
     contentRef.innerHTML += getSearchedPokemonTemplate(
       responseSearchedPokemonJSON
     );
@@ -57,7 +61,8 @@ async function loadSelectedPokemon(id) {
   // check if last pokemon reached
   if (id <= 1) {
     document.getElementById("previous_arrow").classList.add("d-none");
-    document.getElementById("overlay-navigation").style.justifyContent = "flex-end";
+    document.getElementById("overlay-navigation").style.justifyContent =
+      "flex-end";
   }
 }
 
@@ -67,6 +72,8 @@ async function searchPokemon(path = "/?limit=10000&offset=0") {
   let inputValueRef = document.getElementById("input_search");
 
   if (inputValueRef.value.length >= 3) {
+    // hide button during search
+    document.getElementById("button").classList.add("d-none");
     let searchedPokemon = responseSearchPokemonJson.results.filter((pokemon) =>
       pokemon.name
         .toLowerCase()
@@ -127,4 +134,11 @@ function nextPokemon(id) {
 function previousPokemon(id) {
   id--;
   loadSelectedPokemon(id);
+}
+
+function checkImageSrc(responseSearchedPokemonJSON) {
+  if (responseSearchedPokemonJSON.sprites.other.home.front_default == null ) {
+    responseSearchedPokemonJSON.sprites.other.home.front_default =
+      "./assets/icons/favicon.png";
+  }
 }
