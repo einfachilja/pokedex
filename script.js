@@ -12,9 +12,7 @@ const BASE_URL = "https://pokeapi.co/api/v2/pokemon/";
 async function loadAllPokemon(path = "") {
   let response = await fetch(BASE_URL + path);
   let responseJson = await response.json();
-
   loadedPokemonArray = responseJson.results;
-
   showSpinner();
   await renderAllPokemon(loadedPokemonArray);
   hideSpinner();
@@ -23,6 +21,8 @@ async function loadAllPokemon(path = "") {
 async function renderAllPokemon(loadedPokemonArray) {
   let contentRef = document.getElementById("content");
   contentRef.innerHTML = "";
+  // chache loaded pokemon
+  let fullHTML = ""; 
 
   for (
     let indexPokemon = 0;
@@ -32,8 +32,11 @@ async function renderAllPokemon(loadedPokemonArray) {
     let responsePokemon = await fetch(loadedPokemonArray[indexPokemon].url);
     let responsePokemonJson = await responsePokemon.json();
     checkImageSrc(responsePokemonJson);
-    contentRef.innerHTML += getPokemonTemplate(responsePokemonJson);
+    // chache loaded pokemon
+    fullHTML += getPokemonTemplate(responsePokemonJson);
   }
+    // chache loaded pokemon
+  contentRef.innerHTML = fullHTML;
 }
 
 async function loadSelectedPokemon(id) {
@@ -41,7 +44,7 @@ async function loadSelectedPokemon(id) {
   let responseSelectedPokemonJson = await responseSelectedPokemon.json();
   document.getElementById("overlay").innerHTML = getSelectedPokemonTemplate(responseSelectedPokemonJson);
   openOverlay();
-
+  
   // check if last pokemon reached
   if (id <= 1) {
     document.getElementById("previous_arrow").classList.add("d-none");
